@@ -1,4 +1,4 @@
-package task2;
+package by.java.training.chp;
 
 public class Loops {
 	
