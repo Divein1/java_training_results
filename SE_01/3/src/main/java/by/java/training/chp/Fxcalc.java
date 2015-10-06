@@ -1,17 +1,18 @@
 package by.java.training.chp;
-import java.util.Scanner;
 public class Fxcalc {
 
 	public static void main(String[] args) {
-		Scanner readin = new Scanner(System.in);
-		int a = 0, b = 0, h = 0;
-		System.out.println("Input a");
-		a = readin.nextInt();
-		System.out.println("Input b");
-		b = readin.nextInt();
-		System.out.println("Input h");
-		h = readin.nextInt();
-			
+		double a = 1, b = 10, h = 2, F, x;
+		x = a;
+		System.out.print("F(x)=tg(2x)-3");
+		while (x<=b) {
+			F = Math.tan( 2 * x ) - 3;
+			System.out.printf("\nif x= %1.0f, F(x)= %5f;", x, F);
+			x+=h;
+		}
+		
+
+
 		}
 		
 
