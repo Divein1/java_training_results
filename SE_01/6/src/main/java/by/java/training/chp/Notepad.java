@@ -1,39 +1,23 @@
 package by.java.training.chp;
-import java.util.Scanner;
 public class Notepad {
 
+	/**
+	 * Создает массив строк,
+	 * заполняет шаблонными строками.
+	 */
 	public static void main(String[] args) {
 		NotepadEdit edit = new NotepadEdit();
-		Scanner scanner = new Scanner(System.in);
-		int input;
 		String[] memo = new String[50];
-		while (true){
-			System.out.println("Choose operation:");
-			System.out.println("0: Exit 1: Add note 2: Remove note 3:Edit note 4:View all notes");
-			input = scanner.nextInt();
-			switch(input){
-			case 0: 
-				System.exit(0);
-			case 1: 
-				edit.addNote(memo);
-				break;
-			case 2:
-				edit.removeNote(memo);
-				break;
-			case 3:
-				edit.editNote(memo);
-				break;
-			case 4:
-				edit.viewAll(memo);
-				break;
-			default: 
-				System.out.println("Incorrect input");
-				System.out.println();
-			}
-			}
-		
-		}
-
+		memo[0] = "-----Java is a general-purpose computer programming language that is concurrent,";
+		memo[1] = "-----class-based, object-oriented,  and specifically designed to have ";
+		memo[2] = "-----as few implementation dependencies as possible.";
+		memo[3] = "-----It is intended to let application developers \"write once, run anywhere\" (WORA),";
+		memo[4] = "-----meaning that compiled Java code can run on all platforms that support Java ";
+		memo[5] = "-----without the need for recompilation.";
+		/**  Вызывает метод класса NotepadEdit для отображения меню. */
+		edit.menu(memo);
 	}
+
+}
 
 
