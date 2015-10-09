@@ -1,9 +1,9 @@
 package by.java.training.chp;
+
 public class Notepad {
 
 	/**
-	 * Создает массив строк,
-	 * заполняет шаблонными строками.
+	 * Создает массив строк, заполняет шаблонными строками.
 	 */
 	public static void main(String[] args) {
 		NotepadEdit edit = new NotepadEdit();
@@ -14,10 +14,8 @@ public class Notepad {
 		memo[3] = "-----It is intended to let application developers \"write once, run anywhere\" (WORA),";
 		memo[4] = "-----meaning that compiled Java code can run on all platforms that support Java ";
 		memo[5] = "-----without the need for recompilation.";
-		/**  Вызывает метод класса NotepadEdit для отображения меню. */
+		/** Вызывает метод класса NotepadEdit для отображения меню. */
 		edit.menu(memo);
 	}
 
 }
-
-
