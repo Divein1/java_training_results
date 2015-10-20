@@ -4,18 +4,18 @@ public class NuclearSubmarine {
 	private NuclearDrive drive = new NuclearDrive();
 	
 
-	public void callEngineStart(int speed) {
-		drive.engineStart(speed);
+	public void callEngineStart(int fuel) {
+		drive.engineStart(fuel);
 	}
 	public void callEngineStart() {
 		drive.engineStart(10);
 	}
 
 	class NuclearDrive {
-		public void engineStart(int speed) {
+		public void engineStart(int fuel) {
 			String str = " ";
 			System.out.println("Engine started. Moving to new location.");
-			for (int i = 0; i < speed; i++) {
+			for (int i = 0; i < fuel; i++) {
 				System.out.println(str + "->");
 				str = str + "     ";
 				try {
