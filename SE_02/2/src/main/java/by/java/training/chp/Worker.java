@@ -14,6 +14,11 @@ public class Worker {
 		this.name = name;
 		itemPool = new Item[itemCount];
 	}
+	
+	public Worker(String name, int itemCount) {
+		this.name = name;
+		itemPool = new Item[itemCount];
+	}
 
 	public void getStats() {
 		int summ = 0;

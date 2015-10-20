@@ -2,8 +2,8 @@ package by.java.training.chp;
 
 public class Item {
 	String name;
-	int price = 0;
-	int count = 0;
+	int price;
+	int count;
 
 	public Item() {
 	}
