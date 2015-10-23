@@ -15,6 +15,8 @@ public class FormGroup {
 		StudentList.add(new Student("Pierce Len"));
 		StudentList.add(new Student("Connor Bernard"));
 		StudentList.add(new Student("Roland Randy"));
+		StudentList.add(new Student("David Eck"));
+
 		Group group = new Group();
 		group.createGroup(StudentList, Discipline.BIOLOGY);
 		group.createGroup(StudentList, Discipline.CHEMISTRY);
@@ -22,16 +24,26 @@ public class FormGroup {
 		group.createGroup(StudentList, Discipline.PE);
 		group.createGroup(StudentList, Discipline.PHYSICS);
 
-		System.out.println(StudentList);
-		System.out.println();
+		// System.out.println(StudentList);
+		// System.out.println();
 
 		System.out.print("BIOLOGY GROUP");
 		group.showGroup(StudentList, Discipline.BIOLOGY);
 		System.out.println();
+
 		System.out.print("PHYSICS GROUP");
 		group.showGroup(StudentList, Discipline.PHYSICS);
+
 		System.out.println();
-		StudentList.get(1).hasGroups();
+		System.out.println();
+		for (int i = 0; i < StudentList.size(); i++) {
+			StudentList.get(i).hasGroups();
+		}
+
+		System.out.println();
+		group.getStudStatus(StudentList, 0, Discipline.BIOLOGY);
+		group.getStudStatus(StudentList, 0, Discipline.MATH);
+		group.getStudStatus(StudentList, 0, Discipline.PHYSICS);
 
 	}
 

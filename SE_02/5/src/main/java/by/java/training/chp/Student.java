@@ -1,7 +1,13 @@
 package by.java.training.chp;
 
 public class Student {
-	private int groups = 0;
+	private int groups; // used for group count
+	private String name;
+	private double math;
+	private double chem;
+	private double phys;
+	private int bio;
+	private int pe;
 
 	public Student() {
 		this("undef");
@@ -10,13 +16,6 @@ public class Student {
 	public Student(String name) {
 		this.name = name;
 	}
-
-	String name;
-	double math;
-	int bio;
-	int pe;
-	double chem;
-	double phys;
 
 	public void setMark(double mark, Discipline d) {
 		groups += 1;
@@ -40,6 +39,10 @@ public class Student {
 
 	}
 
+	public double getMark() {
+		return (math + bio + pe + chem + phys) / groups;
+	}
+
 	public double getMark(Discipline d) {
 		switch (d) {
 		case BIOLOGY:
@@ -57,10 +60,10 @@ public class Student {
 
 	public void hasGroups() {
 		if (groups == 0) {
-			System.out.println("Student" + name + "has no groups.");
+			System.out.println("Student " + name + "	has no groups.");
 		} else {
 
-			System.out.print("Student " + name + " has " + groups + " gr. Including:");
+			System.out.print("Student " + name + "	has " + groups + " gr. including:");
 			if (math != 0) {
 				System.out.print(" Math.");
 			}
@@ -76,6 +79,7 @@ public class Student {
 			if (phys != 0) {
 				System.out.print(" Physics.");
 			}
+			System.out.println();
 		}
 
 	}
@@ -85,6 +89,10 @@ public class Student {
 
 		return "\nStudent name: " + name + " 		Marks: Math=" + math + ", Biology=" + bio + ", PE=" + pe
 				+ ", Chemistry=" + chem + ", Physic=" + phys;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
