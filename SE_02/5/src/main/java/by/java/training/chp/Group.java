@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 enum Discipline {
-	MATH, BIOLOGY, PE, CHEMISTRY, PHYSICS
+	MATHEMATICS, BIOLOGY, PE, CHEMISTRY, PHYSICS
 }
 
 public class Group {

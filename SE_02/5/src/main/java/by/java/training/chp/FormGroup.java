@@ -20,7 +20,7 @@ public class FormGroup {
 		Group group = new Group();
 		group.createGroup(StudentList, Discipline.BIOLOGY);
 		group.createGroup(StudentList, Discipline.CHEMISTRY);
-		group.createGroup(StudentList, Discipline.MATH);
+		group.createGroup(StudentList, Discipline.MATHEMATICS);
 		group.createGroup(StudentList, Discipline.PE);
 		group.createGroup(StudentList, Discipline.PHYSICS);
 
@@ -42,8 +42,8 @@ public class FormGroup {
 
 		System.out.println();
 		group.getStudStatus(StudentList, 0, Discipline.BIOLOGY);
-		group.getStudStatus(StudentList, 0, Discipline.MATH);
 		group.getStudStatus(StudentList, 0, Discipline.PHYSICS);
+		group.getStudStatus(StudentList, 0, Discipline.MATHEMATICS);
 
 	}
 

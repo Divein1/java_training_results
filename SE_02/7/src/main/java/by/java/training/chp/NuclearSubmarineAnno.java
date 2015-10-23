@@ -1,15 +1,20 @@
 package by.java.training.chp;
 
-public class NuclearSubmarine {
+@ControlledObject(name = "Boat")
+public class NuclearSubmarineAnno {
+	@NameAnno("VERONICA")
+	String name = "BOAT NAME";
+	
 	private NuclearDrive drive = new NuclearDrive();
 
+	
 	public void callEngineStart(int fuel) {
 		drive.engineStart(fuel);
 	}
+	@MethAnno(name = "callStart")
 	public void callEngineStart() {
 		drive.engineStart(10);
 	}
-
 	class NuclearDrive {
 		public void engineStart(int fuel) {
 			String str = " ";
@@ -29,7 +34,7 @@ public class NuclearSubmarine {
 	}
 
 	public static void main(String[] args) {
-		NuclearSubmarine boat = new NuclearSubmarine();
+		NuclearSubmarineAnno boat = new NuclearSubmarineAnno();
 		boat.callEngineStart(5);
 	}
 

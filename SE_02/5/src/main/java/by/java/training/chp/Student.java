@@ -17,6 +17,10 @@ public class Student {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setMark(double mark, Discipline d) {
 		groups += 1;
 		switch (d) {
@@ -26,7 +30,7 @@ public class Student {
 		case CHEMISTRY:
 			chem = mark;
 			break;
-		case MATH:
+		case MATHEMATICS:
 			math = mark;
 			break;
 		case PE:
@@ -49,7 +53,7 @@ public class Student {
 			return bio;
 		case CHEMISTRY:
 			return chem;
-		case MATH:
+		case MATHEMATICS:
 			return math;
 		case PE:
 			return pe;
@@ -89,10 +93,6 @@ public class Student {
 
 		return "\nStudent name: " + name + " 		Marks: Math=" + math + ", Biology=" + bio + ", PE=" + pe
 				+ ", Chemistry=" + chem + ", Physic=" + phys;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 }
