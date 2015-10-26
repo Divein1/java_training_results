@@ -11,10 +11,10 @@ import org.apache.commons.io.FileUtils;
 public class CrazyLogger {
 
 	//Find string at list
-	public static void findStr(String find, List<StringBuilder> c) {
+	public static void findStr(String find, List<String> c) {
 		int count = 0;
 		StringBuilder result = new StringBuilder("At fields: ");
-		for (StringBuilder strb : c) {
+		for (String strb : c) {
 			if (strb.indexOf(find) != -1) {
 				count++;
 				result.append("\n" + strb);
@@ -24,7 +24,7 @@ public class CrazyLogger {
 
 	}
 	//Find string at specific field
-	public static void findStr(String find,int index , List<StringBuilder> c){
+	public static void findStr(String find,int index , List<String> c){
 		if (c.get(index).indexOf(find)!=-1){
 			System.out.println("\nYour string is a part of field ¹"+ index);
 		}else 
@@ -55,8 +55,8 @@ public class CrazyLogger {
 		//System.out.println(readStr);
 
 		// Find string
-		findStr(" 1", stringB);
-		findStr("20",19, stringB);
+		findStr(" 1", readStr);
+		findStr("20",19, readStr);
 		
 
 	}
