@@ -40,10 +40,7 @@ public class ShortFAQ {
 			System.out.println(key + ": " + value);
 		}
 		System.out.println("\nInput number of question.");
-		while (!scanner.hasNextInt()) {
-			System.out.println("Input correct number to proceed");
-			scanner.next();
-		}
+		
 		ResourceBundle answers = ResourceBundle.getBundle("by.java.training.chp.answers", locale);
 		scanner.nextLine(); //without this scanner magic runs both try and catch blocks
 
