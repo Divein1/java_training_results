@@ -1,0 +1,49 @@
+package by.java.training.chp.dataacess.dao.impl;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
+import by.java.training.chp.dataacess.dao.ToursDao;
+import by.java.training.chp.dataacess.model.Tours;
+@Repository
+public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	@Override
+	public Tours getById(Integer id) {
+		return getById(id, "tours", "tour_id");
+	}
+
+	@Override
+	public void delete(Tours tour) {
+		jdbcTemplate.update("DELETE FROM tours WHERE tour_id = ?", tour.getTourId());
+	}
+
+	@Override
+	public void insert(Tours tour) {
+		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+		jdbcInsert.withTableName("tours").usingGeneratedKeyColumns("tour_id");
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("travel_purpose_id", tour.getTravelPurposeId());
+		parameters.put("transport_id", tour.getTransportId());
+		parameters.put("hotel_id", tour.getHotelId());
+		parameters.put("board_basis_id", tour.getBoardBasisId());
+		parameters.put("destination_id", tour.getDestinationId());
+		parameters.put("date_of_arrival", tour.getDateOfArrival());
+		parameters.put("date_of_departure", tour.getDateOfDeparture());
+		parameters.put("price", tour.getPrice());
+		jdbcInsert.execute(new MapSqlParameterSource(parameters));
+
+		
+	}
+
+
+}
