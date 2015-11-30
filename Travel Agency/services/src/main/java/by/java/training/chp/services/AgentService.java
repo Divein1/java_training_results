@@ -11,6 +11,7 @@ import by.java.training.chp.dataacess.model.LoginInfo;
 public interface AgentService {
 	
 	Agents getById(Integer id);
+	Agents getByLogin(String str);
 	void addAgent(String agentName, String agentStatus, String skype, String username,String passworld) throws IOException;
 	void deleteAgent(Agents agent);
 	void updateAgent(Agents agent, LoginInfo loginInfo) throws IOException;

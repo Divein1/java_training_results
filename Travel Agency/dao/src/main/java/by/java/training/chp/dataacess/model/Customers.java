@@ -85,6 +85,74 @@ public class Customers {
 	public void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customers other = (Customers) obj;
+		if (additionalNotes == null) {
+			if (other.additionalNotes != null)
+				return false;
+		} else if (!additionalNotes.equals(other.additionalNotes))
+			return false;
+		if (birthday == null) {
+			if (other.birthday != null)
+				return false;
+		} else if (!birthday.equals(other.birthday))
+			return false;
+		if (customerId == null) {
+			if (other.customerId != null)
+				return false;
+		} else if (!customerId.equals(other.customerId))
+			return false;
+		if (customerName == null) {
+			if (other.customerName != null)
+				return false;
+		} else if (!customerName.equals(other.customerName))
+			return false;
+		if (departureAddress == null) {
+			if (other.departureAddress != null)
+				return false;
+		} else if (!departureAddress.equals(other.departureAddress))
+			return false;
+		if (eMail == null) {
+			if (other.eMail != null)
+				return false;
+		} else if (!eMail.equals(other.eMail))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (loginInfo == null) {
+			if (other.loginInfo != null)
+				return false;
+		} else if (!loginInfo.equals(other.loginInfo))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		if (toursBooked == null) {
+			if (other.toursBooked != null)
+				return false;
+		} else if (!toursBooked.equals(other.toursBooked))
+			return false;
+		return true;
+	}
 	
 	
 

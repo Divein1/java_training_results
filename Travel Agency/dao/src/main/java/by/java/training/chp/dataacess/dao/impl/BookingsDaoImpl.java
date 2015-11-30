@@ -1,6 +1,7 @@
 package by.java.training.chp.dataacess.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,10 @@ public class BookingsDaoImpl extends GenericDaoImpl<Bookings> implements Booking
 	public void delete(Bookings booking) {
 		jdbcTemplate.update("DELETE FROM bookings WHERE booking_id = ?", booking.getBookingId());
 
+	}
+	
+	public List<Bookings> findAll() {
+		return super.findAll("bookings");
 	}
 
 }

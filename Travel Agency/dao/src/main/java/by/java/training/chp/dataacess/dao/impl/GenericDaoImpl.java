@@ -11,13 +11,15 @@ public abstract class GenericDaoImpl<T> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public <T, M> T getById(M id, String tableName, String idField) {
+	@SuppressWarnings("unchecked")
+	public <M> T getById(M id, String tableName, String idField) {
 		Class<T> classOfObjectClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 		return (T) jdbcTemplate.queryForObject("SELECT * FROM public." + tableName + " WHERE "+ tableName +"." + idField + " = ?",
 				new Object[] { id }, new BeanPropertyRowMapper<T>(classOfObjectClass));
 
 	}
+	@SuppressWarnings("unchecked")
 	public List<T> findAll(String tableName) {
 		Class<T> classOfObjectClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];

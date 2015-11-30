@@ -52,6 +52,14 @@ public class CustomersServiceImpl implements CustomersService {
 		LOGGER.info("New values: {}", customer);
 
 	}
+	
+	public void updateCustomer(Customers customer) throws IOException {
+		
+		LOGGER.info("Updating customer : {}", customersDao.getById(customer.getCustomerId()));
+		customersDao.update(customer);
+		LOGGER.info("New values: {}", customer);
+
+	}
 
 	/**
 	 * createLogInfo checks for uniqueness, creates new login info obj
@@ -77,7 +85,7 @@ public class CustomersServiceImpl implements CustomersService {
 
 	@Override
 	public void deleteCustomer(Customers customer) {
-		LOGGER.info("Customer deleted {}", customer);
+		LOGGER.info("Customer deleted: {}", customer);
 		customersDao.delete(customer);
 
 	}

@@ -66,4 +66,10 @@ public class LoginInfoDaoImpl extends GenericDaoImpl<LoginInfo>implements LoginI
 
 	}
 
+	@Override
+	public void delete(LoginInfo loginInfo) {
+		jdbcTemplate.update("DELETE FROM login_info WHERE info_id = ?", loginInfo.getInfoId());
+		
+	}
+
 }

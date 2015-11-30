@@ -9,4 +9,5 @@ Integer insert(LoginInfo loginInfo);
 void update(LoginInfo loginInfo);
 Boolean checkExistance(String login);
 Boolean checkExistance(String login, Integer id);
+void delete(LoginInfo loginInfo);
 }

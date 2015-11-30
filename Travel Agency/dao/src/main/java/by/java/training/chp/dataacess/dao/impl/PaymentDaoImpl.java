@@ -1,6 +1,7 @@
 package by.java.training.chp.dataacess.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 				jdbcInsert.withTableName("payment").usingGeneratedKeyColumns("payment_id");
 				              Map<String, Object> parameters = new HashMap<String, Object>();
 				              parameters.put("booking_id", payment.getBookingId());
-				              parameters.put("amount_of_payment", payment.getAmountOfPayment());
+				              parameters.put("amout_of_payment", payment.getAmoutOfPayment());
 				              parameters.put("date_of_payment", payment.getDateOfPayment());
 				              Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 				              return ((Number) key).intValue();
@@ -51,12 +52,16 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 				.restrictingColumns("customer_id");
 
 		Map<String, Object> addParameters = new HashMap<String, Object>();
-		  addParameters.put("amount_of_payment", payment.getAmountOfPayment());
+		  addParameters.put("amout_of_payment", payment.getAmoutOfPayment());
           addParameters.put("date_of_payment", payment.getDateOfPayment());
 		Map<String, Object> restrictParameters = new HashMap<String, Object>();
 		restrictParameters.put("customer_id", payment.getPaymentId());
 		jdbcUpdate.execute(addParameters, restrictParameters);
 		
+	}
+	@Override
+	public List<Payment> findAll() {
+		return super.findAll("payment");
 	}
 	
 

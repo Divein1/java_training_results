@@ -9,6 +9,7 @@ import by.java.training.chp.services.CityService;
 
 @Service
 public class CityServiceImpl  implements CityService {
+
 	
 	@Autowired
 	private CityDao cityDao;

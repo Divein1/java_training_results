@@ -19,5 +19,6 @@ public interface CustomersService {
 	List<Customers> findAll();
 
 	void updateCustomer(Customers customer, LoginInfo loginInfo) throws IOException;
+	void updateCustomer(Customers customer) throws IOException;
 
 }

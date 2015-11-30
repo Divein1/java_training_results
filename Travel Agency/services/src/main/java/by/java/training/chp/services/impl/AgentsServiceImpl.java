@@ -12,6 +12,7 @@ import by.java.training.chp.dataacess.dao.AgentsDao;
 import by.java.training.chp.dataacess.model.Agents;
 import by.java.training.chp.dataacess.model.LoginInfo;
 import by.java.training.chp.services.AgentService;
+
 @Service
 public class AgentsServiceImpl implements AgentService {
 
@@ -21,8 +22,18 @@ public class AgentsServiceImpl implements AgentService {
 	private AgentsDao agentsDao;
 
 	@Override
+	public Agents getByLogin(String str) {
+		LOGGER.info("Pulling Agent by login :{}", str);
+		return agentsDao.getByLogin(str);
+	}
+
+	@Override
 	public Agents getById(Integer id) {
-		return agentsDao.getById(id);
+		if (agentsDao.getById(id) != null){
+		LOGGER.info("Pulling Agent by  id:{}", id);
+		return agentsDao.getById(id);}
+		else 
+			throw new NullPointerException("Agent obj null");
 	}
 
 	@Override
@@ -39,7 +50,7 @@ public class AgentsServiceImpl implements AgentService {
 
 	@Override
 	public void deleteAgent(Agents agent) {
-		LOGGER.info("Agent deleted {}", agent);
+		LOGGER.info("Agent deleted, obj: {}", agent);
 		agentsDao.delete(agent);
 
 	}
@@ -60,7 +71,9 @@ public class AgentsServiceImpl implements AgentService {
 		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
 		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
 		LoginInfo loginInfo = log.createLogInfo(username, passworld);
-		agent.setaLoginInfo(log.insertAndGetKey(loginInfo));
+		int id = log.insertAndGetKey(loginInfo);
+		agent.setaLoginInfo(id);
+		LOGGER.info("Login info inserted for agent {} , id = {}", agent);
 	}
 
 }

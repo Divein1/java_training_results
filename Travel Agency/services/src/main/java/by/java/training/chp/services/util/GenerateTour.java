@@ -8,10 +8,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import by.java.training.chp.dataacess.dao.impl.ToursDaoImpl;
 import by.java.training.chp.dataacess.model.Tours;
 
-public class UtilGenerateTour {
+public class GenerateTour {
 
 	public static void main(String[] args) {
-		UtilGenerateTour utilGenerateTour = new UtilGenerateTour();
+		GenerateTour utilGenerateTour = new GenerateTour();
 		utilGenerateTour.genSampleTours();
 
 	}

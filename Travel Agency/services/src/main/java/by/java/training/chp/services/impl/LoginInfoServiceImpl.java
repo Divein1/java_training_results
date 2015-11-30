@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import by.java.training.chp.dataacess.dao.LoginInfoDao;
 import by.java.training.chp.dataacess.model.LoginInfo;
 import by.java.training.chp.services.LoginInfoService;
+
 @Service
 public class LoginInfoServiceImpl implements LoginInfoService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginInfoServiceImpl.class);
@@ -18,10 +19,11 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 
 	@Override
 	public void updateLogInfo(LoginInfo info) throws IOException {
-			LOGGER.info("Updating login info: {}",loginInfoDao.getById(info.getInfoId()));
-			loginInfoDao.update(info);
-			LOGGER.info("New values: {}",info);
+		LOGGER.info("Updating login info: {}", loginInfoDao.getById(info.getInfoId()));
+		loginInfoDao.update(info);
+		LOGGER.info("New values: {}", info);
 	}
+
 	@Override
 	public LoginInfo createLogInfo(String username, String passworld) throws IOException {
 		LoginInfo loginInfo = new LoginInfo();
@@ -34,15 +36,23 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 
 		return loginInfo;
 	}
+
 	@Override
 	public Integer insertAndGetKey(LoginInfo logInf) {
-		return loginInfoDao.insert(logInf);
+		Integer id = loginInfoDao.insert(logInf);
+		LOGGER.info("LoginInf pushed to db: {}", logInf);
+		return id;
 	}
 
 	@Override
 	public LoginInfo getById(Integer id) {
 		return loginInfoDao.getById(id);
+	}
 
+	@Override
+	public void delete(LoginInfo info) {
+		LOGGER.info("LoginInf deleted from db: {}", info);
+		loginInfoDao.delete(info);
 	}
 
 }

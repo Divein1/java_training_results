@@ -16,7 +16,7 @@ import by.java.training.chp.dataacess.model.Customers;
 import paillard.florent.springframework.simplejdbcupdate.SimpleJdbcUpdate;
 
 @Repository
-public class CustomersDaoImpl extends GenericDaoImpl<Customers> implements CustomersDao {
+public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements CustomersDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -24,7 +24,7 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers> implements Custo
 	@Override
 	public Customers getById(Integer id) {
 		return getById(id, "customers", "customer_id");
-		
+
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers> implements Custo
 						+ " INNER JOIN public.login_info ON (public.customers.login_info = public.login_info.info_id) WHERE public.login_info.u_login =  ?",
 				new Object[] { str }, new BeanPropertyRowMapper<Customers>(Customers.class));
 	}
-	
+
 	public List<Customers> findAll() {
 		return super.findAll("customers");
 	}

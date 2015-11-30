@@ -1,10 +1,10 @@
 package by.java.training.chp.dataacess.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -55,6 +55,10 @@ public class DiscountsDaoImpl extends GenericDaoImpl<Discounts> implements Disco
 	public void delete(Discounts discount) {
 		jdbcTemplate.update("DELETE FROM discounts WHERE discount_id = ?", discount.getDiscountId());
 
+	}
+	@Override
+	public List<Discounts> findAll() {
+		return super.findAll("discounts");
 	}
 
 }

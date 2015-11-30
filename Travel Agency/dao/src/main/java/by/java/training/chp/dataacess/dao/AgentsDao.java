@@ -7,5 +7,6 @@ public interface AgentsDao {
 	Integer insert(Agents agent);
 	void update(Agents agent);
 	Agents getById(Integer id);
+	Agents getByLogin(String str);
 
 }

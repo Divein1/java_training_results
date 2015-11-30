@@ -9,4 +9,5 @@ public interface LoginInfoService {
 	Integer insertAndGetKey(LoginInfo logInf);
 	LoginInfo getById(Integer id);
 	void updateLogInfo(LoginInfo info)throws IOException;
+	void delete(LoginInfo info);
 }

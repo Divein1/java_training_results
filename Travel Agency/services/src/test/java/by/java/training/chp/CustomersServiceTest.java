@@ -5,39 +5,55 @@ import static by.java.training.chp.services.util.RandomVal.getRString;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import by.java.training.chp.dataacess.model.Customers;
 import by.java.training.chp.services.CustomersService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-db-context.xml")
-public class CustomersServiceTest {
+public class CustomersServiceTest extends AbstractTest {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomersServiceTest.class);
 
 	@Autowired
 	private CustomersService customersService;
 
 	@Test
-	public void registerCustomerTest() throws IOException {
+	public void registerDeleteCustomerTest() throws IOException {
 		String str = getRString(20);
 		int num = getRInt(100);
 		customersService.registerCustomer(str, str, new Date(), str, str, num, str, str, str);
-		
-		
-		
+		Assert.assertNotNull(customersService.getByLogin(str));
+		LOGGER.debug("RegisterDeleteCustomer Test, obj:  {}", customersService.getByLogin(str));
+		customersService.deleteCustomer(customersService.getByLogin(str));
+		LOGGER.debug("RegisterDeletCustomer Test: Success");
 
 	}
 
 	@Test
-	public void createCustomerWithEmptyEmailShouldFail() {
-		// customersService.registerCustomer(customerName, gender, birthday,
-		// phoneNumber, eMail, departureAddress, additionalNotes, username,
-		// passworld);
+	public void checkExistance() {
+		List<Customers> customer = customersService.findAll();
+		Assert.assertNotNull(customer);
+		LOGGER.debug("Get All Customers Test: Succes, obj - {}", customer);
+	}
+
+	@Test
+	public void updateCustomer() throws IOException {
+		String str = getRString(20);
+		int num = getRInt(100);
+		customersService.registerCustomer(str, str, new Date(), str, str, num, str, str, str);
+		Customers customer = customersService.getByLogin(str);
+		customer.setCustomerName(getRString(13));
+		customersService.updateCustomer(customer);
+		Customers customerNew = customersService.getByLogin(str);
+		Assert.assertEquals(customer, customerNew);
+		LOGGER.debug("Update Customer Test: Succes, obj - {}", customer);
+		customersService.deleteCustomer(customerNew);
 	}
 
 }

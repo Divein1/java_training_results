@@ -60,6 +60,64 @@ public class Bookings {
 	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bookingId == null) ? 0 : bookingId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bookings other = (Bookings) obj;
+		if (additionalNotes == null) {
+			if (other.additionalNotes != null)
+				return false;
+		} else if (!additionalNotes.equals(other.additionalNotes))
+			return false;
+		if (agentId == null) {
+			if (other.agentId != null)
+				return false;
+		} else if (!agentId.equals(other.agentId))
+			return false;
+		if (bookingId == null) {
+			if (other.bookingId != null)
+				return false;
+		} else if (!bookingId.equals(other.bookingId))
+			return false;
+		if (bookingStatus == null) {
+			if (other.bookingStatus != null)
+				return false;
+		} else if (!bookingStatus.equals(other.bookingStatus))
+			return false;
+		if (customerId == null) {
+			if (other.customerId != null)
+				return false;
+		} else if (!customerId.equals(other.customerId))
+			return false;
+		if (dateOfBooking == null) {
+			if (other.dateOfBooking != null)
+				return false;
+		} else if (!dateOfBooking.equals(other.dateOfBooking))
+			return false;
+		if (discountId == null) {
+			if (other.discountId != null)
+				return false;
+		} else if (!discountId.equals(other.discountId))
+			return false;
+		if (tourId == null) {
+			if (other.tourId != null)
+				return false;
+		} else if (!tourId.equals(other.tourId))
+			return false;
+		return true;
+	}
 	
 
 	

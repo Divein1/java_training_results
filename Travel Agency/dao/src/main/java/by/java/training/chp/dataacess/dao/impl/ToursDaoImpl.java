@@ -1,6 +1,7 @@
 package by.java.training.chp.dataacess.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,13 @@ public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
 		parameters.put("price", tour.getPrice());
 		jdbcInsert.execute(new MapSqlParameterSource(parameters));
 
-		
 	}
+	
+	@Override
+	public List<Tours> findAll() {
+		return super.findAll("tours");
+	}
+
 
 
 }

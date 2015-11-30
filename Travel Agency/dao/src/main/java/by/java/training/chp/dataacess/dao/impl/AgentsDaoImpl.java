@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import by.java.training.chp.dataacess.dao.AgentsDao;
 import by.java.training.chp.dataacess.model.Agents;
 import by.java.training.chp.dataacess.model.City;
+import by.java.training.chp.dataacess.model.Customers;
 import paillard.florent.springframework.simplejdbcupdate.SimpleJdbcUpdate;
 
 @Repository
@@ -54,6 +55,15 @@ public class AgentsDaoImpl extends GenericDaoImpl<Agents>implements AgentsDao {
 	public Agents getById(Integer id) {
 		return getById(id, "agents", "agent_id");
 
+	}
+
+	public Agents getByLogin(String str) {
+		return (Agents) jdbcTemplate.queryForObject(
+				"SELECT DISTINCT  public.agents.agent_id,  public.agents.agent_name, public.agents.a_login_info, "
+						+ "  public.agents.agent_status,  public.agents.skype FROM  public.agents"
+						+ " INNER JOIN public.login_info ON (public.agents.a_login_info = public.login_info.info_id)"
+						+ " WHERE public.login_info.u_login = ?",
+				new Object[] { str }, new BeanPropertyRowMapper<Agents>(Agents.class));
 	}
 
 	@Override
