@@ -21,6 +21,7 @@ public class HotelDaoImpl extends GenericDaoImpl<Hotel> implements HotelDao{
 	}
 
 	@Override
+	//Unused, for future impl
 	public List<Hotel> findByParams(String sql) {
 		List<Hotel>  hotels = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Hotel>(Hotel.class));
 		return hotels;

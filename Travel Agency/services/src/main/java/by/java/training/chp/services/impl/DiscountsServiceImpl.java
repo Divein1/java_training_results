@@ -10,7 +10,7 @@ import by.java.training.chp.dataacess.model.Discounts;
 import by.java.training.chp.services.DiscountsService;
 
 @Service
-public class DiscountsServiceImpl implements DiscountsService{
+public class DiscountsServiceImpl implements DiscountsService {
 	@Autowired
 	private DiscountsDao discountsDao;
 
@@ -23,6 +23,20 @@ public class DiscountsServiceImpl implements DiscountsService{
 	public List<Discounts> findAll() {
 		return discountsDao.findAll();
 	}
-	
-	
+
+	@Override
+	public Integer insert(Discounts discount) {
+		return  discountsDao.insert(discount);
+	}
+
+	@Override
+	public void update(Discounts discount) {
+		discountsDao.update(discount);
+	}
+
+	@Override
+	public void delete(Discounts discount) {
+		discountsDao.delete(discount);
+	}
+
 }

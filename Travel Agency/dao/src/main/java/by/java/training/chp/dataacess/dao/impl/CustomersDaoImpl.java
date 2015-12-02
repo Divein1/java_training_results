@@ -29,8 +29,6 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 
 	@Override
 	public Integer insert(Customers customer) {
-		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-		jdbcInsert.withTableName("customers").usingGeneratedKeyColumns("customer_id");
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("customer_name", customer.getCustomerName());
 		parameters.put("gender", customer.getGender());
@@ -41,24 +39,16 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 		parameters.put("additional_notes", customer.getAdditionalNotes());
 		parameters.put("login_info", customer.getLoginInfo());
 		parameters.put("tours_booked", customer.getToursBooked());
-		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
-		return ((Number) key).intValue();
+		return insert("customers", "customer_id", parameters);
 	}
 
 	@Override
 	public void delete(Customers customer) {
-		jdbcTemplate.update("DELETE FROM customers WHERE customer_id = ?", customer.getCustomerId());
-
+		delete(customer.getCustomerId(), "customers", "customer_id");
 	}
 
 	@Override
 	public void update(Customers customer) {
-		SimpleJdbcUpdate jdbcUpdate = new SimpleJdbcUpdate(jdbcTemplate);
-		jdbcUpdate
-				.withTableName("customers").updatingColumns("customer_name", "gender", "birthday", "phone_number",
-						"e_mail", "departure_address", "additional_notes", "tours_booked", "login_info")
-				.restrictingColumns("customer_id");
-
 		Map<String, Object> addParameters = new HashMap<String, Object>();
 		addParameters.put("customer_name", customer.getCustomerName());
 		addParameters.put("gender", customer.getGender());
@@ -71,8 +61,7 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 		addParameters.put("tours_booked", customer.getToursBooked());
 		Map<String, Object> restrictParameters = new HashMap<String, Object>();
 		restrictParameters.put("customer_id", customer.getCustomerId());
-		jdbcUpdate.execute(addParameters, restrictParameters);
-
+		update("customers", "customer_id", addParameters, restrictParameters);
 	}
 
 	@Override

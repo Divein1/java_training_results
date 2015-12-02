@@ -14,9 +14,7 @@ import by.java.training.chp.dataacess.dao.ToursDao;
 import by.java.training.chp.dataacess.model.Tours;
 @Repository
 public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+
 
 	@Override
 	public Tours getById(Integer id) {
@@ -25,13 +23,11 @@ public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
 
 	@Override
 	public void delete(Tours tour) {
-		jdbcTemplate.update("DELETE FROM tours WHERE tour_id = ?", tour.getTourId());
+		delete(tour.getTourId(), "tours", "tour_id");
 	}
 
 	@Override
 	public void insert(Tours tour) {
-		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-		jdbcInsert.withTableName("tours").usingGeneratedKeyColumns("tour_id");
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("travel_purpose_id", tour.getTravelPurposeId());
 		parameters.put("transport_id", tour.getTransportId());
@@ -41,8 +37,7 @@ public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
 		parameters.put("date_of_arrival", tour.getDateOfArrival());
 		parameters.put("date_of_departure", tour.getDateOfDeparture());
 		parameters.put("price", tour.getPrice());
-		jdbcInsert.execute(new MapSqlParameterSource(parameters));
-
+		insert("tours", "tour_id", parameters);
 	}
 	
 	@Override
