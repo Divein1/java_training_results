@@ -94,3 +94,11 @@ SE_06/2/.settings/org.eclipse.jdt.core.prefs
 SE_06/2/.settings/org.eclipse.m2e.core.prefs
 SE_06/2/.project
 SE_06/2/.classpath
+old/
+Travel Agency/webapp/.classpath
+Travel Agency/webapp/.project
+Travel Agency/webapp/.settings/org.eclipse.wst.common.component
+Travel Agency/dao/.classpath
+Travel Agency/dao/.project
+Travel Agency/dao/.settings/org.eclipse.wst.common.component
+Travel Agency/.project

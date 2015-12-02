@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import by.java.training.chp.dataacess.dao.AgentsDao;
+import by.java.training.chp.dataacess.dao.LoginInfoDao;
 import by.java.training.chp.dataacess.model.Agents;
 import by.java.training.chp.dataacess.model.LoginInfo;
 import by.java.training.chp.services.AgentService;
@@ -20,6 +21,9 @@ public class AgentsServiceImpl implements AgentService {
 
 	@Autowired
 	private AgentsDao agentsDao;
+	
+	@Autowired
+	private LoginInfoDao loginInfoDao;
 
 	@Override
 	public Agents getByLogin(String str) {
@@ -57,21 +61,17 @@ public class AgentsServiceImpl implements AgentService {
 
 	@Override
 	public void updateAgent(Agents agent, LoginInfo loginInfo) throws IOException {
-		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
-		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
-		log.updateLogInfo(loginInfo);
-		agentsDao.update(agent);
+		loginInfoDao.update(loginInfo);
 		LOGGER.info("Updating agent : {}", agentsDao.getById(agent.getAgentId()));
 		agentsDao.update(agent);
-		log.updateLogInfo(loginInfo);
 		LOGGER.info("New values: {}", agent);
 	}
 
 	private void createAndCheckLogInfo(Agents agent, String username, String passworld) throws IOException {
-		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
-		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
-		LoginInfo loginInfo = log.createLogInfo(username, passworld);
-		int id = log.insertAndGetKey(loginInfo);
+		LoginInfo loginInfo =  new  LoginInfo();
+		loginInfo.setuLogin(username);
+		loginInfo.setuPassworld(passworld);
+		Integer id = loginInfoDao.insert(loginInfo);
 		agent.setaLoginInfo(id);
 		LOGGER.info("Login info inserted for agent {} , id = {}", agent);
 	}

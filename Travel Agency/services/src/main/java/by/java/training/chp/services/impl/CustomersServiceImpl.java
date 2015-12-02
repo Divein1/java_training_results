@@ -11,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import by.java.training.chp.dataacess.dao.CustomersDao;
+import by.java.training.chp.dataacess.dao.LoginInfoDao;
+import by.java.training.chp.dataacess.model.Agents;
 import by.java.training.chp.dataacess.model.Customers;
 import by.java.training.chp.dataacess.model.LoginInfo;
 import by.java.training.chp.services.CustomersService;
@@ -22,6 +24,9 @@ public class CustomersServiceImpl implements CustomersService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomersServiceImpl.class);
 	@Autowired
 	private CustomersDao customersDao;
+	
+	@Autowired
+	private LoginInfoDao loginInfoDao;
 
 	@Override
 	public Customers get(Integer id) {
@@ -33,12 +38,9 @@ public class CustomersServiceImpl implements CustomersService {
 			Integer departureAddress, String additionalNotes, String username, String passworld) throws IOException {
 		Customers customer = createCustomer(customerName, gender, birthday, phoneNumber, eMail, departureAddress,
 				additionalNotes);
-		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
-		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
-		LoginInfo loginInfo = log.createLogInfo(username, passworld);
-		customer.setLoginInfo(log.insertAndGetKey(loginInfo));
+		createAndCheckLogInfo(customer,username,passworld);
 		Integer id = customersDao.insert(customer);
-		LOGGER.info("New user created, id :{}", id);
+		LOGGER.info("New user created, id :{}", customer.getCustomerId());
 
 	}
 
@@ -88,6 +90,15 @@ public class CustomersServiceImpl implements CustomersService {
 		LOGGER.info("Customer deleted: {}", customer);
 		customersDao.delete(customer);
 
+	}
+	
+	private void createAndCheckLogInfo(Customers customer, String username, String passworld) throws IOException {
+		LoginInfo loginInfo =  new  LoginInfo();
+		loginInfo.setuLogin(username);
+		loginInfo.setuPassworld(passworld);
+		Integer id = loginInfoDao.insert(loginInfo);
+		customer.setLoginInfo(id);
+		LOGGER.info("Login info inserted for customer {} , id = {}", customer);
 	}
 
 	@Override
