@@ -11,14 +11,12 @@ import by.java.training.chp.services.TravelPurposeService;
 
 @Service
 public class TravelPurposeServiceImpl implements TravelPurposeService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(TravelPurposeServiceImpl.class);
 	
 	@Autowired
 	private TravelPurposeDao travelPurposeDao;
 	
 	@Override
 	public TravelPurpose getById(Integer id) {
-		LOGGER.debug("Pulling object {}", travelPurposeDao.getById(id));
 		return travelPurposeDao.getById(id);
 	}
 

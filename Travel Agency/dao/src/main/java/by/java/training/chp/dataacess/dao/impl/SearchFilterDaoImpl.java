@@ -12,11 +12,11 @@ import com.truemesh.squiggle.SelectQuery;
 import com.truemesh.squiggle.Table;
 import com.truemesh.squiggle.criteria.MatchCriteria;
 
-import by.java.training.chp.dataacess.dao.ToursFilterDao;
-import by.java.training.chp.dataacess.model.ToursFilter;
+import by.java.training.chp.dataacess.dao.SearchFilterDao;
+import by.java.training.chp.dataacess.model.SearchFilter;
 
 @Repository
-public class ToursFilterDaoImpl implements ToursFilterDao {
+public class SearchFilterDaoImpl implements SearchFilterDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -29,7 +29,7 @@ public class ToursFilterDaoImpl implements ToursFilterDao {
 	private Table city = new Table("city");
 
 	@Override
-	public List<ToursFilter> get(ToursFilter toursFilter) {
+	public List<SearchFilter> get(SearchFilter searchFilter) {
 		/*
 		 * SQL Query Builder
 		 * Rating -  higher than set
@@ -54,84 +54,84 @@ public class ToursFilterDaoImpl implements ToursFilterDao {
 		select.addJoin(tours, "transport_id", transports, "transport_id");
 		select.addJoin(tours, "hotel_id", hotel, "hotel_id");
 
-		if (toursFilter.getVehicle_type() != null) {
-			select.addCriteria(new MatchCriteria(tours, "transport_id", MatchCriteria.EQUALS, toursFilter.getVehicle_type()));
+		if (searchFilter.getVehicle_type() != null) {
+			select.addCriteria(new MatchCriteria(tours, "transport_id", MatchCriteria.EQUALS, searchFilter.getVehicle_type()));
 		}
-		if (toursFilter.getCityName() != null) {
-			select.addCriteria(new MatchCriteria(tours, "destination_id", MatchCriteria.EQUALS, toursFilter.getCityName()));
+		if (searchFilter.getCityName() != null) {
+			select.addCriteria(new MatchCriteria(tours, "destination_id", MatchCriteria.EQUALS, searchFilter.getCityName()));
 		}
-		if (toursFilter.getFormOfTourism() != null) {
-			select.addCriteria(new MatchCriteria(tours, "travel_purpose_id", MatchCriteria.EQUALS, toursFilter.getFormOfTourism()));
+		if (searchFilter.getFormOfTourism() != null) {
+			select.addCriteria(new MatchCriteria(tours, "travel_purpose_id", MatchCriteria.EQUALS, searchFilter.getFormOfTourism()));
 		}
-		if (toursFilter.getMealType() != null) {
-			select.addCriteria(new MatchCriteria(tours, "board_basis_id", MatchCriteria.EQUALS, toursFilter.getMealType()));
+		if (searchFilter.getMealType() != null) {
+			select.addCriteria(new MatchCriteria(tours, "board_basis_id", MatchCriteria.EQUALS, searchFilter.getMealType()));
 		}
-		if (toursFilter.getPropertyType() != null) {
-			select.addCriteria(new MatchCriteria(hotel, "property_type", MatchCriteria.EQUALS, toursFilter.getPropertyType()));
+		if (searchFilter.getPropertyType() != null) {
+			select.addCriteria(new MatchCriteria(hotel, "property_type", MatchCriteria.EQUALS, searchFilter.getPropertyType()));
 		}
-		if (toursFilter.getPrice() != null) {
-			select.addCriteria(new MatchCriteria(tours, "price", MatchCriteria.LESS, toursFilter.getPrice()));
+		if (searchFilter.getPrice() != null) {
+			select.addCriteria(new MatchCriteria(tours, "price", MatchCriteria.LESS, searchFilter.getPrice()));
 		}
-		if (toursFilter.getRating() != null) {
-			select.addCriteria(new MatchCriteria(hotel, "rating", MatchCriteria.GREATER, toursFilter.getRating()));
+		if (searchFilter.getRating() != null) {
+			select.addCriteria(new MatchCriteria(hotel, "rating", MatchCriteria.GREATER, searchFilter.getRating()));
 		}
-		if (toursFilter.getHasAirConditioning() != null) {
+		if (searchFilter.getHasAirConditioning() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_air_conditioning", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasSauna() != null) {
+		if (searchFilter.getHasSauna() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_sauna", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasSafe() != null) {
+		if (searchFilter.getHasSafe() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_safe", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasFitnessFacility() != null) {
+		if (searchFilter.getHasFitnessFacility() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_fitness_facility", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasGameRoom() != null) {
+		if (searchFilter.getHasGameRoom() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_game_room", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasHouseBar() != null) {
+		if (searchFilter.getHasHouseBar() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_house_bar", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasChildrenAllowed() != null) {
+		if (searchFilter.getHasChildrenAllowed() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_children_allowed", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasTvInRoom() != null) {
+		if (searchFilter.getHasTvInRoom() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_tv_in_room", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasMeetingRoom() != null) {
+		if (searchFilter.getHasMeetingRoom() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_meeting_room", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasBusinessCenter() != null) {
+		if (searchFilter.getHasBusinessCenter() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_business_center", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasOutdoorPool() != null) {
+		if (searchFilter.getHasOutdoorPool() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_outdoor_pool", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasNonSmokingRooms() != null) {
+		if (searchFilter.getHasNonSmokingRooms() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_non_smoking_rooms", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasMiniBar() != null) {
+		if (searchFilter.getHasMiniBar() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_mini_bar", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasRoomService() != null) {
+		if (searchFilter.getHasRoomService() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_room_service", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasFamilyRooms() != null) {
+		if (searchFilter.getHasFamilyRooms() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_family_rooms", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasCarRentDesk() != null) {
+		if (searchFilter.getHasCarRentDesk() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_car_rent_desk", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getHasHairDryer() != null) {
+		if (searchFilter.getHasHairDryer() != null) {
 			select.addCriteria(new MatchCriteria(hotel, "has_hair_dryer", MatchCriteria.EQUALS, "Y"));
 		}
-		if (toursFilter.getDateOfDeparture() != null) {
-			select.addCriteria(new MatchCriteria(tours, "date_of_departure", MatchCriteria.EQUALS, toursFilter.getDateOfDeparture()));
+		if (searchFilter.getDateOfDeparture() != null) {
+			select.addCriteria(new MatchCriteria(tours, "date_of_departure", MatchCriteria.EQUALS, searchFilter.getDateOfDeparture()));
 		}
 		
-		List<ToursFilter> toursFetched = new ArrayList<>();
-		toursFetched = jdbcTemplate.query(select.toString(), new BeanPropertyRowMapper<ToursFilter>(ToursFilter.class));
+		List<SearchFilter> toursFetched = new ArrayList<>();
+		toursFetched = jdbcTemplate.query(select.toString(), new BeanPropertyRowMapper<SearchFilter>(SearchFilter.class));
 		return toursFetched;
 	}
 

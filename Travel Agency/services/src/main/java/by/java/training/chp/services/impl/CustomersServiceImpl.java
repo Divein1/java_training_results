@@ -21,7 +21,6 @@ import by.java.training.chp.services.impl.LoginInfoServiceImpl;
 @Service
 public class CustomersServiceImpl implements CustomersService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CustomersServiceImpl.class);
 	@Autowired
 	private CustomersDao customersDao;
 	
@@ -40,27 +39,18 @@ public class CustomersServiceImpl implements CustomersService {
 				additionalNotes);
 		createAndCheckLogInfo(customer,username,passworld);
 		Integer id = customersDao.insert(customer);
-		LOGGER.info("New user created, id :{}", customer.getCustomerId());
-
 	}
 
 	@Override
 	public void updateCustomer(Customers customer, LoginInfo loginInfo) throws IOException {
 		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
 		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
-		LOGGER.info("Updating customer : {}", customersDao.getById(customer.getCustomerId()));
 		customersDao.update(customer);
 		log.updateLogInfo(loginInfo);
-		LOGGER.info("New values: {}", customer);
-
 	}
 	
 	public void updateCustomer(Customers customer) throws IOException {
-		
-		LOGGER.info("Updating customer : {}", customersDao.getById(customer.getCustomerId()));
 		customersDao.update(customer);
-		LOGGER.info("New values: {}", customer);
-
 	}
 
 	/**
@@ -87,9 +77,7 @@ public class CustomersServiceImpl implements CustomersService {
 
 	@Override
 	public void deleteCustomer(Customers customer) {
-		LOGGER.info("Customer deleted: {}", customer);
 		customersDao.delete(customer);
-
 	}
 	
 	private void createAndCheckLogInfo(Customers customer, String username, String passworld) throws IOException {
@@ -98,7 +86,6 @@ public class CustomersServiceImpl implements CustomersService {
 		loginInfo.setuPassworld(passworld);
 		Integer id = loginInfoDao.insert(loginInfo);
 		customer.setLoginInfo(id);
-		LOGGER.info("Login info inserted for customer {} , id = {}", customer);
 	}
 
 	@Override

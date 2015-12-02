@@ -30,20 +30,21 @@ public class BookingsServiceImpl implements BookingsService {
 	public Integer createBooking(Bookings booking) {
 		booking.setBookingStatus("Unprocessed");
 		booking.setDateOfBooking(new Date());
-		LOGGER.info("Pushing new obj to db {}", booking);
-		return bookingsDao.insert(booking);
+		Integer id = bookingsDao.insert(booking);
+		LOGGER.info("Pushing new booking to db: id {} obj {}",id,  booking);
+		return id;
 	}
 
 	@Override
 	public void update(Bookings booking) {
-		LOGGER.info("Updating obj {}", booking);
+		LOGGER.info("Updating booking {}", booking);
 		bookingsDao.update(booking);
 
 	}
 
 	@Override
 	public void delete(Bookings booking) {
-		LOGGER.info("Deleting obj {}", booking);
+		LOGGER.info("Deleting booking  {}", booking);
 		bookingsDao.delete(booking);
 
 	}

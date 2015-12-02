@@ -11,7 +11,6 @@ import by.java.training.chp.services.TransportService;
 
 @Service
 public class TransportServiceImpl implements TransportService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(TravelPurposeServiceImpl.class);
 
 	
 	@Autowired
@@ -19,7 +18,6 @@ public class TransportServiceImpl implements TransportService {
 
 	@Override
 	public Transports getById(Integer id) {
-		LOGGER.debug("Pulling object {}", transportsDao.getById(id));
 		return transportsDao.getById(id);
 	}
 	

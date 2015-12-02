@@ -48,14 +48,14 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 	public void update(Payment payment) {
 		SimpleJdbcUpdate jdbcUpdate = new SimpleJdbcUpdate(jdbcTemplate);
 		jdbcUpdate
-				.withTableName("payment").updatingColumns("amount_of_payment","date_of_payment")
-				.restrictingColumns("customer_id");
+				.withTableName("payment").updatingColumns("amout_of_payment","date_of_payment")
+				.restrictingColumns("payment_id");
 
 		Map<String, Object> addParameters = new HashMap<String, Object>();
 		  addParameters.put("amout_of_payment", payment.getAmoutOfPayment());
           addParameters.put("date_of_payment", payment.getDateOfPayment());
 		Map<String, Object> restrictParameters = new HashMap<String, Object>();
-		restrictParameters.put("customer_id", payment.getPaymentId());
+		restrictParameters.put("payment_id", payment.getPaymentId());
 		jdbcUpdate.execute(addParameters, restrictParameters);
 		
 	}

@@ -34,36 +34,26 @@
 		<Logger name="org.apache.wicket.request.cycle.RequestCycle"
 			level="FATAL" />
 
-		<Logger name="by.java.training.chp.services.impl.CustomersServiceImpl"
-			level="INFO">
-			<AppenderRef ref="LOGFILE" />
-		</Logger>
-
-		<Logger name="by.java.training.chp.services.impl.AgentsServiceImpl"
-			level="INFO">
-			<AppenderRef ref="LOGFILE" />
-		</Logger>
-
-		<Logger name="by.java.training.chp.AgentServiceTest" level="DEBUG">
-			<AppenderRef ref="TESTFILE" />
-		</Logger>
-		<Logger name="by.java.training.chp.ToursFilterServiceTest" level="DEBUG">
-			<AppenderRef ref="TESTFILE" />
-		</Logger>
-
-		<Logger name="by.java.training.chp.BoardBasisServiceImpl" level="INFO">
+		<Logger name="by.java.training.chp.PaymentServiceImpl" level="INFO">
 			<AppenderRef ref="LOGFILE" />
 		</Logger>
 		
 		<Logger name="by.java.training.chp.BookingsServiceImpl" level="INFO">
 			<AppenderRef ref="LOGFILE" />
 		</Logger>
-		
-		<Logger name="by.java.training.chp.TravelPurposeServiceImpl" level="INFO">
-			<AppenderRef ref="LOGFILE" />
+
+		<Logger name="by.java.training.chp.ToursFilterServiceTest"
+			level="DEBUG">
+			<AppenderRef ref="TESTFILE" />
 		</Logger>
-		<Logger name="by.java.training.chp.TransportServiceImpl" level="INFO">
-			<AppenderRef ref="LOGFILE" />
+
+		<Logger name="by.java.training.chp.CustomersServiceTest"
+			level="DEBUG">
+			<AppenderRef ref="TESTFILE" />
+		</Logger>
+
+		<Logger name="by.java.training.chp.BookingsServiceTest" level="INFO">
+			<AppenderRef ref="TESTFILE" />
 		</Logger>
 
 		<Root level="INFO">

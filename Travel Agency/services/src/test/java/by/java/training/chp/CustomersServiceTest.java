@@ -39,7 +39,7 @@ public class CustomersServiceTest extends AbstractTest {
 	public void checkExistance() {
 		List<Customers> customer = customersService.findAll();
 		Assert.assertNotNull(customer);
-		LOGGER.debug("Get All Customers Test: Succes, obj - {}", customer);
+		LOGGER.debug("Get All Customers Test: Succes");
 	}
 
 	@Test

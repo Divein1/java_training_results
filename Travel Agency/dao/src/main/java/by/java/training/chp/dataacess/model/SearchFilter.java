@@ -2,7 +2,7 @@ package by.java.training.chp.dataacess.model;
 
 import java.util.Date;
 
-public class ToursFilter {
+public class SearchFilter {
 	private Integer tourId;
 	private String formOfTourism;
 	private String vehicle_type;
@@ -101,7 +101,7 @@ public class ToursFilter {
 	}
 	@Override
 	public String toString() {
-		return "ToursFilter [formOfTourism=" + formOfTourism + ", vehicle_type=" + vehicle_type + ", hotelName="
+		return "SearchFilter [formOfTourism=" + formOfTourism + ", vehicle_type=" + vehicle_type + ", hotelName="
 				+ hotelName + ", mealType=" + mealType + ", cityName=" + cityName + ", dateOfDeparture="
 				+ dateOfDeparture + ", dateOfArrival=" + dateOfArrival + ", price=" + price + ", rating=" + rating
 				+ ", propertyType=" + propertyType + "]";

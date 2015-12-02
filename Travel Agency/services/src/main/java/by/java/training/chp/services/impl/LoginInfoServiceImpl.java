@@ -13,15 +13,12 @@ import by.java.training.chp.services.LoginInfoService;
 
 @Service
 public class LoginInfoServiceImpl implements LoginInfoService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoginInfoServiceImpl.class);
 	@Autowired
 	private LoginInfoDao loginInfoDao;
 
 	@Override
 	public void updateLogInfo(LoginInfo info) throws IOException {
-		LOGGER.info("Updating login info: {}", loginInfoDao.getById(info.getInfoId()));
 		loginInfoDao.update(info);
-		LOGGER.info("New values: {}", info);
 	}
 
 	@Override
@@ -40,7 +37,6 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 	@Override
 	public Integer insertAndGetKey(LoginInfo logInf) {
 		Integer id = loginInfoDao.insert(logInf);
-		LOGGER.info("LoginInf pushed to db: {}", logInf);
 		return id;
 	}
 
@@ -51,7 +47,6 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 
 	@Override
 	public void delete(LoginInfo info) {
-		LOGGER.info("LoginInf deleted from db: {}", info);
 		loginInfoDao.delete(info);
 	}
 

@@ -12,14 +12,12 @@ import by.java.training.chp.services.BoardBasisService;
 @Service
 public class BoardBasisServiceImpl implements BoardBasisService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BoardBasisServiceImpl.class);
 
 	@Autowired
 	private BoardBasisDao boardBasisDao;
 
 	@Override
 	public BoardBasis getById(Integer id) {
-			LOGGER.debug("Pulling object {}", boardBasisDao.getById(id));
 			return boardBasisDao.getById(id);
 	}
 
