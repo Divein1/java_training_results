@@ -8,7 +8,7 @@ public class Tours {
 	private Integer transportId;
 	private Integer hotelId;
 	private Integer boardBasisId;
-	private Integer destination; //Check country codes! unf
+	private Integer destination; 
 	private Date dateOfDeparture;
 	private Date dateOfArrival;
 	private Integer price;

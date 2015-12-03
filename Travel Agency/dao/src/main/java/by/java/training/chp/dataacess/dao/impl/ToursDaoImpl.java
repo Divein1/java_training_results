@@ -18,6 +18,8 @@ public class ToursDaoImpl extends GenericDaoImpl<Tours> implements ToursDao {
 
 	@Override
 	public Tours getById(Integer id) {
+		Tours tour = getById(id, "tours", "tour_id");
+		
 		return getById(id, "tours", "tour_id");
 	}
 

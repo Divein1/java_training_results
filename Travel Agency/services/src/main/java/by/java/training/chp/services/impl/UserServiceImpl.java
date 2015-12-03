@@ -4,25 +4,20 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import by.java.training.chp.dataacess.dao.CustomersDao;
 import by.java.training.chp.dataacess.dao.LoginInfoDao;
-import by.java.training.chp.dataacess.model.Agents;
+import by.java.training.chp.dataacess.dao.UserDao;
 import by.java.training.chp.dataacess.model.Customers;
 import by.java.training.chp.dataacess.model.LoginInfo;
-import by.java.training.chp.services.CustomersService;
-import by.java.training.chp.services.impl.LoginInfoServiceImpl;
+import by.java.training.chp.services.UserService;
 
 @Service
-public class CustomersServiceImpl implements CustomersService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private CustomersDao customersDao;
+	private UserDao customersDao;
 	
 	@Autowired
 	private LoginInfoDao loginInfoDao;
@@ -33,20 +28,31 @@ public class CustomersServiceImpl implements CustomersService {
 	}
 
 	@Override
-	public void registerCustomer(String customerName, String gender, Date birthday, String phoneNumber, String eMail,
-			Integer departureAddress, String additionalNotes, String username, String passworld) throws IOException {
+	public Integer registerClient(String customerName, String gender, Date birthday, String phoneNumber, String eMail,
+			Integer departureAddress, String additionalNotes, String username, String passworld, String skype) throws IOException {
+		String status = "client";
 		Customers customer = createCustomer(customerName, gender, birthday, phoneNumber, eMail, departureAddress,
-				additionalNotes);
+				additionalNotes,skype,status );
 		createAndCheckLogInfo(customer,username,passworld);
-		Integer id = customersDao.insert(customer);
+		return customersDao.insert(customer);
+	}
+	
+
+	@Override
+	public Integer registerAgent(String customerName, String gender, Date birthday, String phoneNumber, String eMail,
+			Integer departureAddress, String additionalNotes, String username, String passworld, String skype)
+					throws IOException {
+		String status = "agent";
+		Customers customer = createCustomer(customerName, gender, birthday, phoneNumber, eMail, departureAddress,
+				additionalNotes,skype,status );
+		createAndCheckLogInfo(customer,username,passworld);
+		return customersDao.insert(customer);
 	}
 
 	@Override
 	public void updateCustomer(Customers customer, LoginInfo loginInfo) throws IOException {
-		ClassPathXmlApplicationContext aContext = new ClassPathXmlApplicationContext("spring-db-context.xml");
-		LoginInfoServiceImpl log = aContext.getBean(LoginInfoServiceImpl.class);
 		customersDao.update(customer);
-		log.updateLogInfo(loginInfo);
+		loginInfoDao.update(loginInfo);
 	}
 	
 	public void updateCustomer(Customers customer) throws IOException {
@@ -56,12 +62,14 @@ public class CustomersServiceImpl implements CustomersService {
 	/**
 	 * createLogInfo checks for uniqueness, creates new login info obj
 	 * insertAndGetKey inserts into db, returns id of generated PK
+	 * @param skype 
+	 * @param status 
 	 * 
 	 * @throws IOException
 	 */
 
 	private Customers createCustomer(String customerName, String gender, Date birthday, String phoneNumber,
-			String eMail, Integer departureAddress, String additionalNotes) {
+			String eMail, Integer departureAddress, String additionalNotes, String skype, String status) {
 
 		Customers customer = new Customers();
 		customer.setCustomerName(customerName);
@@ -72,6 +80,8 @@ public class CustomersServiceImpl implements CustomersService {
 		customer.setAdditionalNotes(additionalNotes);
 		customer.setDepartureAddress(departureAddress);
 		customer.setToursBooked(0);
+		customer.setSkype(skype);
+		customer.setStatus(status);
 		return customer;
 	}
 
@@ -97,5 +107,6 @@ public class CustomersServiceImpl implements CustomersService {
 	public List<Customers> findAll() {
 		return customersDao.findAll();
 	}
+
 
 }

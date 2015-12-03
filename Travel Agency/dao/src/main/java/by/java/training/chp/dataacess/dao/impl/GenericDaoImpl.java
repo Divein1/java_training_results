@@ -10,9 +10,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import paillard.florent.springframework.simplejdbcupdate.SimpleJdbcUpdate;
-
+@Repository
 public abstract class GenericDaoImpl<T> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -21,8 +22,7 @@ public abstract class GenericDaoImpl<T> {
 	public <M> T getById(M id, String tableName, String idField) {
 		Class<T> classOfObjectClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
-		return (T) jdbcTemplate.queryForObject(
-				"SELECT * FROM public." + tableName + " WHERE " + tableName + "." + idField + " = ?",
+		return (T) jdbcTemplate.queryForObject("SELECT * FROM public." + tableName + " WHERE " + tableName + "." + idField + " = ?",
 				new Object[] { id }, new BeanPropertyRowMapper<T>(classOfObjectClass));
 
 	}
@@ -51,6 +51,7 @@ public abstract class GenericDaoImpl<T> {
 
 	public void update(String tableName, String idField, Map<String, Object> addParameters,
 			Map<String, Object> restrictParameters) {
+		
 		SimpleJdbcUpdate jdbcUpdate = new SimpleJdbcUpdate(jdbcTemplate);
 		Set<String> set = addParameters.keySet();
 		String[] columnNames = set.toArray(new String[0]);

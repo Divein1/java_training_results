@@ -4,7 +4,7 @@ import java.util.List;
 
 import by.java.training.chp.dataacess.model.Customers;
 
-public interface CustomersDao {
+public interface UserDao {
 Customers getById(Integer id);
 void delete(Customers customer);
 Integer insert(Customers customer);

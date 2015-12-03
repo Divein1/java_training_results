@@ -11,12 +11,12 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import by.java.training.chp.dataacess.dao.CustomersDao;
+import by.java.training.chp.dataacess.dao.UserDao;
 import by.java.training.chp.dataacess.model.Customers;
 import paillard.florent.springframework.simplejdbcupdate.SimpleJdbcUpdate;
 
 @Repository
-public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements CustomersDao {
+public class UserDaoImpl extends GenericDaoImpl<Customers>implements UserDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -39,6 +39,8 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 		parameters.put("additional_notes", customer.getAdditionalNotes());
 		parameters.put("login_info", customer.getLoginInfo());
 		parameters.put("tours_booked", customer.getToursBooked());
+		parameters.put("status", customer.getStatus());
+		parameters.put("skype", customer.getSkype());
 		return insert("customers", "customer_id", parameters);
 	}
 
@@ -59,6 +61,8 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 		addParameters.put("additional_notes", customer.getAdditionalNotes());
 		addParameters.put("login_info", customer.getLoginInfo());
 		addParameters.put("tours_booked", customer.getToursBooked());
+		addParameters.put("status", customer.getStatus());
+		addParameters.put("skype", customer.getSkype());
 		Map<String, Object> restrictParameters = new HashMap<String, Object>();
 		restrictParameters.put("customer_id", customer.getCustomerId());
 		update("customers", "customer_id", addParameters, restrictParameters);
@@ -67,7 +71,7 @@ public class CustomersDaoImpl extends GenericDaoImpl<Customers>implements Custom
 	@Override
 	public Customers getByLogin(String str) {
 		return (Customers) jdbcTemplate.queryForObject(
-				"SELECT  public.customers.gender,  public.customers.birthday, public.customers.phone_number, "
+				"SELECT  public.customers.gender,  public.customers.birthday, public.customers.phone_number, public.customers.skype, public.customers.status, "
 						+ "public.customers.e_mail,  public.customers.departure_address, public.customers.additional_notes, "
 						+ "  public.customers.tours_booked,  public.customers.login_info,  public.customers.customer_id,  public.customers.customer_name FROM  public.customers "
 						+ " INNER JOIN public.login_info ON (public.customers.login_info = public.login_info.info_id) WHERE public.login_info.u_login =  ?",

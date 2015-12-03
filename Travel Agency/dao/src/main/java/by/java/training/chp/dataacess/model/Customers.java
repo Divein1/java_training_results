@@ -14,6 +14,8 @@ public class Customers {
 	private String additionalNotes;
 	private Integer loginInfo;
 	private Integer toursBooked;
+	private String status;
+	private String skype;
 	
 	
 	public Integer getCustomerId() {
@@ -77,7 +79,7 @@ public class Customers {
 		return "Customers [customerId=" + customerId + ", customerName=" + customerName + ", gender=" + gender
 				+ ", birthday=" + birthday + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", departureAddress="
 				+ departureAddress + ", additionalNotes=" + additionalNotes + ", loginInfo=" + loginInfo
-				+ ", toursBooked=" + toursBooked + "]";
+				+ ", toursBooked=" + toursBooked + ", status=" + status + ", skype=" + skype + "]";
 	}
 	public String geteMail() {
 		return eMail;
@@ -146,12 +148,34 @@ public class Customers {
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
+		if (skype == null) {
+			if (other.skype != null)
+				return false;
+		} else if (!skype.equals(other.skype))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		if (toursBooked == null) {
 			if (other.toursBooked != null)
 				return false;
 		} else if (!toursBooked.equals(other.toursBooked))
 			return false;
 		return true;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getSkype() {
+		return skype;
+	}
+	public void setSkype(String skype) {
+		this.skype = skype;
 	}
 	
 
