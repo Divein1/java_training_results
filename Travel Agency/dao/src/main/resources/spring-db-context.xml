@@ -37,7 +37,7 @@
     </bean> 
     
 
-	<context:component-scan base-package="by.java.training.chp" />
+	<context:component-scan base-package="by.java.training.chp.dataacess , by.java.training.chp.services , by.java.training.chp.webapp" />
 	<context:property-placeholder
 		ignore-unresolvable="true" location="classpath:app.properties" />
 		
